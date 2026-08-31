@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="meta-site-title">MODAK ENTERPRISE | Wholesale Saree Store & Online Reseller Hub</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf4f5',
+                            100: '#fbe8eb',
+                            200: '#f5d3d8',
+                            300: '#efb3bc',
+                            400: '#e58795',
+                            500: '#d65b6f',
+                            600: '#c23d53',
+                            700: '#a33043',
+                            800: '#872b3a',
+                            900: '#722834',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- User Email & Mobile Sign-In Modal -->
+    <div id="user-signin-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden px-4">
+        <div class="relative bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl z-10 border border-slate-100 animate-fade-in">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-brand-600 text-2xl shadow-inner">
+                    <i class="fa-solid fa-shop"></i>
+                </div>
+                <span id="signin-shop-name" class="text-brand-600 font-semibold text-xs uppercase tracking-wider block">MODAK ENTERPRISE</span>
+                <h3 id="signin-modal-heading" class="font-serif text-2xl font-bold text-slate-900 mt-1">Welcome Reseller!</h3>
+                <p class="text-xs text-slate-500 mt-1">Please enter your email and mobile number to access our wholesale catalog</p>
+            </div>
+            <form onsubmit="handleUserEmailSignIn(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Your Email Address</label>
+                    <input type="email" required id="user-signin-email" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600" placeholder="reseller@boutique.com">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Mobile Number</label>
+                    <input type="tel" required id="user-signin-phone" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600" placeholder="+91 98765 43210">
+                </div>
+                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+                    <span>Enter Store & View Catalogs</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-slate-900 text-slate-200 text-xs py-2 px-4 text-center font-medium relative z-40">
+        <span id="text-top-announcement" data-key="topAnnouncement">Direct Manufacturer Wholesale Rates for Online Resellers & Boutiques • Minimum Order 1 Saree</span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 bg-brand-600 rounded-2xl flex items-center justify-center text-white font-serif font-bold text-xl shadow-md group-hover:bg-brand-700 transition">
+                    <span id="text-logo-initial">M</span>
+                </div>
+                <div>
+                    <h1 id="text-shop-name" class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-slate-900">MODAK ENTERPRISE</h1>
+                    <p id="text-shop-tagline" class="text-[11px] font-medium text-slate-500 uppercase tracking-wider">Wholesale Saree Destination</p>
+                </div>
+            </a>
+
+            <!-- Navigation Actions -->
+            <div class="flex items-center gap-3">
+                <button onclick="openUserProfileModal()" class="hidden sm:inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition border border-slate-200">
+                    <i class="fa-solid fa-user-circle text-brand-600 text-sm"></i>
+                    <span>My Profile</span>
+                </button>
+                <button onclick="openOwnerLoginModal()" class="hidden sm:inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2.5 rounded-xl text-xs font-semibold transition border border-slate-200">
+                    <i class="fa-solid fa-lock text-brand-600"></i>
+                    <span>Owner Portal</span>
+                </button>
+                <button onclick="toggleCartDrawer(true)" class="relative bg-brand-50 hover:bg-brand-100 text-brand-700 px-4 py-2.5 rounded-xl text-xs font-semibold transition flex items-center gap-2 border border-brand-200">
+                    <i class="fa-solid fa-bag-shopping text-brand-600 text-base"></i>
+                    <span class="hidden sm:inline">Wholesale Bag</span>
+                    <span id="cart-badge" class="bg-brand-600 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold">0</span>
+                </button>
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleSideMenu(true)" class="sm:hidden w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center text-slate-700 transition">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Side Menu Bar for Mobile / Quick Actions & User Profile Viewer -->
+    <div id="side-menu" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="toggleSideMenu(false)"></div>
+        <div class="absolute inset-y-0 left-0 max-w-xs w-full bg-white shadow-2xl flex flex-col p-6 z-10">
+            <div class="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white font-serif font-bold text-base">
+                        <span id="side-logo-initial">M</span>
+                    </div>
+                    <div>
+                        <h4 class="font-serif font-bold text-slate-900 text-sm">MODAK ENTERPRISE</h4>
+                        <p class="text-[10px] text-slate-500">Reseller Hub</p>
+                    </div>
+                </div>
+                <button onclick="toggleSideMenu(false)" class="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4 flex-1">
+                <!-- User Profile Viewer in Side Menu -->
+                <div class="bg-brand-50 border border-brand-100 rounded-2xl p-4">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-9 h-9 bg-brand-600 text-white rounded-xl flex items-center justify-center text-sm shadow-sm">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-brand-700 block">Reseller Account</span>
+                            <h5 id="side-menu-user-email" class="font-bold text-slate-900 text-xs truncate max-w-[180px]">reseller@boutique.com</h5>
+                        </div>
+                    </div>
+                    <div class="text-[11px] text-slate-600 mb-3 flex items-center gap-1.5">
+                        <i class="fa-solid fa-phone text-brand-600"></i>
+                        <span id="side-menu-user-phone">+91 9876543210</span>
+                    </div>
+                    <button onclick="toggleSideMenu(false); openUserProfileModal();" class="w-full bg-white hover:bg-brand-100 text-brand-700 border border-brand-200 py-2 rounded-xl text-xs font-semibold transition">
+                        Edit / Update Profile
+                    </button>
+                </div>
+
+                <div class="pt-2 space-y-2">
+                    <a href="#catalog-section" onclick="toggleSideMenu(false)" class="flex items-center gap-3 p-3 bg-slate-50 hover:bg-slate-100 rounded-xl text-xs font-semibold text-slate-700 transition">
+                        <i class="fa-solid fa-eye text-brand-600 w-5"></i>
+                        <span>Explore Catalogs</span>
+                    </a>
+                    <button onclick="toggleSideMenu(false); openOwnerLoginModal();" class="w-full flex items-center gap-3 p-3 bg-slate-50 hover:bg-slate-100 rounded-xl text-xs font-semibold text-slate-700 transition text-left">
+                        <i class="fa-solid fa-lock text-brand-600 w-5"></i>
+                        <span>Owner Portal Login</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 text-center text-[10px] text-slate-400">
+                Direct Manufacturer Wholesale Saree Hub
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-brand-900 via-brand-800 to-slate-900 text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#f5d3d8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <span class="inline-flex items-center gap-2 bg-brand-700/60 border border-brand-500/30 text-brand-100 text-xs px-4 py-1.5 rounded-full font-semibold uppercase tracking-widest mb-6 backdrop-blur-sm">
+                <i class="fa-solid fa-star text-amber-300"></i> Direct Loom Manufacturer & Supplier
+            </span>
+            <h2 id="text-hero-title" class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-tight">
+                Premium Wholesale Sarees for Online Resellers & Boutiques
+            </h2>
+            <p id="text-hero-subtitle" class="text-slate-300 text-sm sm:text-base max-w-3xl mx-auto mb-10 leading-relaxed">
+                Source directly from our looms at wholesale factory prices. Handloom Silk, Designer Georgette, Organza, and Wedding Collections with instant digital payments and secure direct bank transfers.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#catalog-section" class="bg-white hover:bg-slate-100 text-brand-900 font-bold px-8 py-4 rounded-2xl transition shadow-xl flex items-center gap-2 text-sm">
+                    <span>Browse Wholesale Catalogs</span>
+                    <i class="fa-solid fa-arrow-down text-xs"></i>
+                </a>
+                <button onclick="openOwnerLoginModal()" class="bg-brand-700/80 hover:bg-brand-700 border border-brand-500/40 text-white font-semibold px-8 py-4 rounded-2xl transition backdrop-blur-sm flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-lock text-xs"></i>
+                    <span>Owner Portal Login</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Catalog Section -->
+    <section id="catalog-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+            <div>
+                <span class="text-brand-600 font-semibold text-xs uppercase tracking-wider block mb-1">Direct Factory Pricing</span>
+                <h3 id="text-catalog-heading" class="font-serif text-3xl font-bold text-slate-900">Explore Saree Catalogs</h3>
+            </div>
+            <!-- Category Filter Tabs -->
+            <div class="flex flex-wrap gap-2">
+                <button onclick="renderProducts('all')" id="cat-btn-all" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-brand-600 text-white shadow-sm">All Sarees</button>
+                <button onclick="renderProducts('Silk')" id="cat-btn-Silk" class="px-4 py-2 rounded-xl text-xs font-semibold transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200">Pure Silk</button>
+                <button onclick="renderProducts('Georgette')" id="cat-btn-Georgette" class="px-4 py-2 rounded-xl text-xs font-semibold transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200">Georgette</button>
+                <button onclick="renderProducts('Organza')" id="cat-btn-Organza" class="px-4 py-2 rounded-xl text-xs font-semibold transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200">Organza</button>
+                <button onclick="renderProducts('Bandhani')" id="cat-btn-Bandhani" class="px-4 py-2 rounded-xl text-xs font-semibold transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200">Bandhani</button>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Dynamically populated via JS -->
+        </div>
+    </section>
+
+    <!-- Owner About Us & Contact Section -->
+    <section class="bg-white border-t border-slate-200 py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-brand-600 font-semibold text-xs uppercase tracking-wider block mb-2">Trusted Wholesale Manufacturer</span>
+                <h3 id="about-us-title" class="font-serif text-3xl font-bold text-slate-900 mb-4">About MODAK ENTERPRISE</h3>
+                <div id="about-us-body" class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto space-y-4">
+                    <p>MODAK ENTERPRISE is a premier wholesale manufacturer and direct-to-reseller distributor specializing in authentic traditional and contemporary sarees. Headquartered in the textile hub, we empower thousands of online boutique owners, social media resellers, and retail stores across India with unmatched wholesale pricing and superior fabric quality.</p>
+                    <p>Our digital-first platform allows online resellers to browse real-time inventory, place bulk orders effortlessly, and pay securely with funds instantly routed to our verified business bank account. Partner with us to scale your reselling business with complete confidence and high profit margins.</p>
+                </div>
+            </div>
+
+            <!-- Owner Contact Info Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-slate-100">
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center flex flex-col items-center">
+                    <div class="w-12 h-12 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center text-lg mb-3 shadow-inner">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <h5 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1">Owner Email</h5>
+                    <p id="owner-contact-email" class="text-xs text-brand-700 font-semibold">modakenterprise@gmail.com</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center flex flex-col items-center">
+                    <div class="w-12 h-12 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center text-lg mb-3 shadow-inner">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <h5 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1">Owner Phone / WhatsApp</h5>
+                    <p id="owner-contact-phone" class="text-xs text-brand-700 font-semibold">+91 9913441482</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center flex flex-col items-center">
+                    <div class="w-12 h-12 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center text-lg mb-3 shadow-inner">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <h5 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1">Office Address</h5>
+                    <p id="owner-contact-address" class="text-xs text-slate-600">Textile Market, Ring Road, Surat, Gujarat - 395002</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white font-serif font-bold text-lg shadow-md">
+                    <span id="footer-logo-initial">M</span>
+                </div>
+                <div>
+                    <h4 id="footer-shop-name" class="font-serif font-bold text-white text-base">MODAK ENTERPRISE</h4>
+                    <p class="text-[11px] text-slate-400">Direct Manufacturer Wholesale Saree Hub</p>
+                </div>
+            </div>
+            <div class="text-xs text-slate-400">
+                © 2026 MODAK ENTERPRISE. All Rights Reserved. Secure Digital Payments & Pan-India Dispatch.
+            </div>
+            <div>
+                <button onclick="openOwnerLoginModal()" class="text-xs text-slate-400 hover:text-white transition flex items-center gap-1.5 bg-slate-800 px-3 py-2 rounded-xl border border-slate-700">
+                    <i class="fa-solid fa-lock text-brand-500"></i>
+                    <span>Owner Login</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Wholesale Bag / Cart Drawer -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="toggleCartDrawer(false)"></div>
+        <div class="absolute inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl flex flex-col z-10">
+            <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                <div>
+                    <span class="text-brand-600 font-semibold text-[10px] uppercase tracking-wider block">Wholesale Order</span>
+                    <h3 class="font-serif text-xl font-bold text-slate-900">Your Wholesale Bag</h3>
+                </div>
+                <button onclick="toggleCartDrawer(false)" class="w-9 h-9 bg-white hover:bg-slate-200 border border-slate-200 rounded-xl flex items-center justify-center text-slate-600 transition shadow-sm">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items Container -->
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 divide-y divide-slate-100">
+                <!-- Populated via JS -->
+            </div>
+
+            <!-- Cart Footer -->
+            <div class="p-6 border-t border-slate-100 bg-slate-50">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-xs font-semibold text-slate-600 uppercase">Subtotal Amount:</span>
+                    <span id="cart-subtotal" class="font-bold text-lg text-brand-700">₹0</span>
+                </div>
+                <button onclick="openCheckoutModal()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-4 rounded-2xl transition shadow-lg shadow-brand-600/20 flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Proceed to GPay / UPI Checkout</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live GPay / UPI Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm hidden px-4">
+        <div class="relative bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl z-10 border border-slate-100 max-h-[92vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <span class="text-brand-600 font-semibold text-xs uppercase tracking-wider block">Live UPI / GPay Payment Gateway</span>
+                    <h3 class="font-serif text-2xl font-bold text-slate-900">Complete Real GPay Payment</h3>
+                </div>
+                <button onclick="closeCheckoutModal()" class="w-9 h-9 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center text-slate-600 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="bg-brand-50 border border-brand-100 rounded-2xl p-4 mb-6">
+                <div class="flex justify-between text-xs text-slate-600 mb-1">
+                    <span>Merchant / Owner Name:</span>
+                    <strong id="checkout-beneficiary-name" class="text-slate-900">MODAK ENTERPRISE</strong>
+                </div>
+                <div class="flex justify-between text-xs text-slate-600 mb-1">
+                    <span>UPI ID / VPA (GPay/PhonePe/Paytm):</span>
+                    <strong id="checkout-upi-id-display" class="text-brand-700 font-mono">modakenterprise@okicici</strong>
+                </div>
+                <div class="flex justify-between text-sm font-bold text-slate-900 pt-2 border-t border-brand-200">
+                    <span>Total Payable:</span>
+                    <span id="checkout-modal-total" class="text-brand-600">₹0</span>
+                </div>
+            </div>
+
+            <!-- Live GPay QR Code Box -->
+            <div class="bg-white border-2 border-dashed border-slate-300 rounded-2xl p-6 text-center mb-6">
+                <p class="text-xs font-semibold text-slate-700 uppercase mb-3"><i class="fa-solid fa-qrcode text-brand-600 mr-1.5"></i> Scan with Google Pay, PhonePe or Paytm</p>
+                <div class="w-48 h-48 bg-white p-2 border border-slate-200 rounded-xl mx-auto shadow-sm flex items-center justify-center relative overflow-hidden">
+                    <img id="checkout-custom-qr-img" src="" alt="GPay UPI QR Code" class="w-full h-full object-contain" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi%3A%2F%2Fpay%3Fpa%3Dmodakenterprise%40okicici'">
+                </div>
+                <p class="text-[11px] text-slate-500 mt-3">Or click below to pay directly via Google Pay / UPI app on your phone:</p>
+                <a id="gpay-intent-btn" href="#" target="_blank" class="mt-3 inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-6 py-3 rounded-xl transition shadow-md w-full">
+                    <i class="fa-brands fa-google-pay text-lg"></i>
+                    <span>Open Google Pay / UPI App to Pay Now</span>
+                </a>
+            </div>
+
+            <form onsubmit="handleDigitalPayment(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Reseller Full Name</label>
+                    <input type="text" required id="order-name" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600" placeholder="Priya Sharma (Boutique Owner)">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">WhatsApp / Phone</label>
+                        <input type="tel" required id="order-phone" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600" placeholder="9876543210">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Business Email</label>
+                        <input type="email" required id="order-email" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600" placeholder="boutique@gmail.com">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Shipping Address (Pan-India Doorstep)</label>
+                    <textarea required id="order-address" rows="2" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600" placeholder="Shop No, Market Name, City, State, Pincode"></textarea>
+                </div>
+
+                <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-3 text-xs text-emerald-800">
+                    <i class="fa-solid fa-shield-check text-emerald-600 text-lg"></i>
+                    <span>Once paid securely via Google Pay / UPI QR scan, clicking confirm below will automatically send the complete order details (product list, user name, email, phone, quantity, date & address) directly to owner's mobile number via WhatsApp.</span>
+                </div>
+
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-4 rounded-xl transition shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Confirm GPay Payment & Send WhatsApp Notification</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Owner Portal Login Modal -->
+    <div id="owner-login-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm hidden px-4">
+        <div class="relative bg-white rounded-3xl max-w-sm w-full p-8 shadow-2xl z-10 border border-slate-100">
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto mb-3 text-brand-600 text-xl shadow-inner">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-slate-900">Owner Portal Login</h3>
+                <p class="text-xs text-slate-500 mt-1">Enter password to manage catalog & website settings</p>
+            </div>
+            <form onsubmit="handleOwnerLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Owner Password</label>
+                    <input type="password" required id="owner-password-input" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600" placeholder="••••••••">
+                </div>
+                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+                    <span>Access Owner Dashboard</span>
+                </button>
+                <button type="button" onclick="closeOwnerLoginModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl transition text-xs">
+                    Cancel
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Owner Dashboard Modal -->
+    <div id="owner-dashboard-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-md hidden px-4">
+        <div class="relative bg-white rounded-3xl max-w-4xl w-full p-8 shadow-2xl z-10 border border-slate-100 max-h-[92vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200">
+                <div>
+                    <span class="text-brand-600 font-semibold text-xs uppercase tracking-wider block">Authorized Manufacturer Access</span>
+                    <h3 class="font-serif text-2xl font-bold text-slate-900">MODAK ENTERPRISE - Owner Control Hub</h3>
+                </div>
+                <button onclick="closeOwnerDashboard()" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center text-slate-600 transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Dashboard Option Cards / Tabs -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                <button onclick="switchOwnerTab('upload')" id="dash-tab-upload-btn" class="p-5 rounded-2xl border-2 text-left transition flex items-start gap-3 border-brand-600 bg-brand-50/50 shadow-sm">
+                    <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center text-base shrink-0">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-xs mb-1">1. Catalog upload</h4>
+                        <p class="text-[11px] text-slate-600">Upload new sarees & prices.</p>
+                    </div>
+                </button>
+                <button onclick="switchOwnerTab('edit')" id="dash-tab-edit-btn" class="p-5 rounded-2xl border-2 text-left transition flex items-start gap-3 border-slate-200 bg-white hover:bg-slate-50">
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center text-base shrink-0">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-xs mb-1">2. Edit Website & About Us</h4>
+                        <p class="text-[11px] text-slate-600">Customize texts, contact, mobile & QR.</p>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Tab Content 1: Catalog Upload & Products Management -->
+            <div id="dash-content-upload" class="space-y-8">
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+                    <h4 class="font-serif text-lg font-bold text-slate-900 mb-4">Add New Saree to Wholesale Catalog</h4>
+                    <form onsubmit="handleAddNewProduct(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Saree Catalog Title</label>
+                                <input type="text" required id="new-prod-name" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600" placeholder="e.g. Banarasi Katan Silk Saree">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Category</label>
+                                <select id="new-prod-cat" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600">
+                                    <option value="Silk">Pure Silk</option>
+                                    <option value="Georgette">Designer Georgette</option>
+                                    <option value="Organza">Organza & Net</option>
+                                    <option value="Bandhani">Traditional Bandhani</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Wholesale Price (₹)</label>
+                                <input type="number" required id="new-prod-price" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600" placeholder="1499">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Upload Saree Image from Computer</label>
+                                <input type="file" accept="image/*" id="new-prod-file-input" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2 text-xs file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Or Direct Image URL (Fallback)</label>
+                            <input type="url" id="new-prod-img" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600" placeholder="https://images.unsplash.com/photo-...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Fabric & Weaving Description</label>
+                            <textarea required id="new-prod-desc" rows="2" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600" placeholder="Rich zari weaving, running blouse piece included..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Upload New Saree to Catalog</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div>
+                    <h4 class="font-serif text-lg font-bold text-slate-900 mb-4">Existing Catalogs & Products</h4>
+                    <div id="owner-product-list" class="space-y-3">
+                        <!-- Rendered via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content 2: Edit Website Texts, About Us, Contact & QR -->
+            <div id="dash-content-edit" class="space-y-6 hidden">
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+                    <h4 class="font-serif text-lg font-bold text-slate-900 mb-4">Edit Website Texts, About Us, Contact & Mobile Notifications</h4>
+                    <form onsubmit="handleSaveSiteTexts(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Shop Name</label>
+                                <input type="text" required id="edit-shop-name" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Shop Tagline</label>
+                                <input type="text" required id="edit-shop-tagline" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Top Announcement Bar Text</label>
+                            <input type="text" required id="edit-top-announcement" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Hero Title</label>
+                                <input type="text" required id="edit-hero-title" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Catalog Section Heading</label>
+                                <input type="text" required id="edit-catalog-heading" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Hero Subtitle</label>
+                            <textarea required id="edit-hero-subtitle" rows="2" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">About Us Title</label>
+                            <input type="text" required id="edit-about-title" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">About Us Description Body</label>
+                            <textarea required id="edit-about-body" rows="4" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600"></textarea>
+                        </div>
+
+                        <!-- Owner Contact Information Section & Order Notification Number -->
+                        <div class="pt-4 border-t border-slate-200">
+                            <h5 class="font-bold text-slate-900 text-sm mb-3"><i class="fa-solid fa-address-card text-brand-600 mr-1.5"></i> Owner Contact Slot & Order WhatsApp/SMS Mobile Number</h5>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Owner Email</label>
+                                    <input type="email" required id="edit-owner-email" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Order Notification Mobile Number (WhatsApp Alerts)</label>
+                                    <input type="text" required id="edit-owner-phone" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600" placeholder="+91 9913441482">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Office Address</label>
+                                <textarea required id="edit-owner-address" rows="2" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Owner UPI QR Settings -->
+                        <div class="pt-4 border-t border-slate-200">
+                            <h5 class="font-bold text-slate-900 text-sm mb-2"><i class="fa-solid fa-qrcode text-brand-600 mr-1.5"></i> Owner GPay / UPI QR Code Settings</h5>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Your Business UPI ID (VPA)</label>
+                                    <input type="text" required id="owner-upi-id-input" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600" placeholder="e.g. mybusiness@okicici">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Upload QR Image File</label>
+                                    <input type="file" accept="image/*" id="owner-qr-file-input" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2 text-xs file:mr-4 file:py-1 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Change Owner Portal Password</label>
+                            <input type="text" id="edit-owner-pwd" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600" placeholder="Leave blank to keep current password">
+                        </div>
+                        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span>Save All Website Changes</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Profile Modal -->
+    <div id="user-profile-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden px-4">
+        <div class="relative bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl z-10 border border-slate-100">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <span class="text-brand-600 font-semibold text-xs uppercase tracking-wider block">Reseller Hub</span>
+                    <h3 class="font-serif text-2xl font-bold text-slate-900">Your Reseller Profile</h3>
+                </div>
+                <button onclick="closeUserProfileModal()" class="w-9 h-9 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center text-slate-600 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form onsubmit="handleUpdateUserProfile(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Your Email Address</label>
+                    <input type="email" required id="profile-email-input" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Mobile Number</label>
+                    <input type="tel" required id="profile-phone-input" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-brand-600">
+                </div>
+                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span>Save Profile Changes</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Custom Message Box Modal -->
+    <div id="msg-box-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden px-4">
+        <div class="relative bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl z-10 text-center">
+            <div id="msg-box-icon" class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h4 id="msg-box-title" class="font-serif text-lg font-bold text-slate-900 mb-1">Success!</h4>
+            <p id="msg-box-body" class="text-xs text-slate-600 mb-6 leading-relaxed">Action completed successfully.</p>
+            <button onclick="closeMsgBox()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 rounded-xl text-xs transition">
+                OK, Continue
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Initial Default Products
+        let defaultProducts = [
+            { id: 1, name: "Banarasi Katan Silk Saree", category: "Silk", price: 1850, image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&auto=format&fit=crop&q=80", desc: "Pure Katan silk with heavy gold zari brocade weaving. Includes unstitched matching blouse." },
+            { id: 2, name: "Designer Georgette Party Wear", category: "Georgette", price: 1250, image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=600&auto=format&fit=crop&q=80", desc: "Soft georgette with intricate sequence and thread embroidery work. Lightweight & elegant." },
+            { id: 3, name: "Organza Floral Print Saree", category: "Organza", price: 1100, image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=600&auto=format&fit=crop&q=80", desc: "Stiff organza fabric featuring vibrant digital floral prints and scalloped embroidered border." },
+            { id: 4, name: "Traditional Bandhani Tie-Dye", category: "Bandhani", price: 950, image: "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&auto=format&fit=crop&q=80", desc: "Authentic Gujarati Bandhani tie-dye pattern on pure art silk. Perfect for festive wear." },
+            { id: 5, name: "Kanjivaram Temple Border Silk", category: "Silk", price: 2400, image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&auto=format&fit=crop&q=80", desc: "Traditional South Indian Kanjivaram silk saree with rich zari pallu and contrast borders." },
+            { id: 6, name: "Chiffon Stone Work Saree", category: "Georgette", price: 1050, image: "https://images.unsplash.com/photo-1610030469668-96d93633b28b?w=600&auto=format&fit=crop&q=80", desc: "Premium pure chiffon with scattered Swarovski crystal stones and delicate lace trim." }
+        ];
+
+        let siteTexts = {
+            shopName: "MODAK ENTERPRISE",
+            shopTagline: "Wholesale Saree Destination",
+            topAnnouncement: "Direct Manufacturer Wholesale Rates for Online Resellers & Boutiques • Minimum Order 1 Saree",
+            heroTitle: "Premium Wholesale Sarees for Online Resellers & Boutiques",
+            heroSubtitle: "Source directly from our looms at wholesale factory prices. Handloom Silk, Designer Georgette, Organza, and Wedding Collections with instant digital payments and secure direct bank transfers.",
+            catalogHeading: "Explore Saree Catalogs",
+            aboutTitle: "About MODAK ENTERPRISE",
+            aboutBody: "MODAK ENTERPRISE is a premier wholesale manufacturer and direct-to-reseller distributor specializing in authentic traditional and contemporary sarees. Headquartered in the textile hub, we empower thousands of online boutique owners, social media resellers, and retail stores across India with unmatched wholesale pricing and superior fabric quality.\n\nOur digital-first platform allows online resellers to browse real-time inventory, place bulk orders effortlessly, and pay securely with funds instantly routed to our verified business bank account. Partner with us to scale your reselling business with complete confidence and high profit margins.",
+            ownerEmail: "modakenterprise@gmail.com",
+            ownerPhone: "+91 9913441482",
+            ownerAddress: "Textile Market, Ring Road, Surat, Gujarat - 395002",
+            upiId: "modakenterprise@okicici",
+            upiQrImage: ""
+        };
+
+        let currentCategory = 'all';
+        let cart = [];
+
+        // Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSavedData();
+            checkUserSignIn();
+            renderProducts('all');
+            updateCartUI();
+            updateUserProfileUI();
+        });
+
+        function checkUserSignIn() {
+            const savedEmail = localStorage.getItem('modak_user_email');
+            if (!savedEmail) {
+                const signinModal = document.getElementById('user-signin-modal');
+                if (signinModal) signinModal.classList.remove('hidden');
+            }
+        }
+
+        function handleUserEmailSignIn(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('user-signin-email');
+            const phoneInput = document.getElementById('user-signin-phone');
+            if (!emailInput || !phoneInput) return;
+            const email = emailInput.value.trim();
+            const phone = phoneInput.value.trim();
+            if (email && phone) {
+                localStorage.setItem('modak_user_email', email);
+                localStorage.setItem('modak_user_phone', phone);
+                const signinModal = document.getElementById('user-signin-modal');
+                if (signinModal) signinModal.classList.add('hidden');
+                updateUserProfileUI();
+                showMessageBox('Welcome Reseller!', 'You are now signed in. Enjoy browsing our direct wholesale catalog.');
+            }
+        }
+
+        function updateUserProfileUI() {
+            const savedEmail = localStorage.getItem('modak_user_email') || 'reseller@boutique.com';
+            const savedPhone = localStorage.getItem('modak_user_phone') || '+91 9876543210';
+            const emailEl = document.getElementById('side-menu-user-email');
+            const phoneEl = document.getElementById('side-menu-user-phone');
+            const logoInitEl = document.getElementById('side-logo-initial');
+            if (emailEl) emailEl.textContent = savedEmail;
+            if (phoneEl) phoneEl.textContent = savedPhone;
+            if (logoInitEl && siteTexts.shopName) logoInitEl.textContent = siteTexts.shopName.charAt(0);
+        }
+
+        function toggleSideMenu(open) {
+            const menu = document.getElementById('side-menu');
+            if (!menu) return;
+            if (open) {
+                updateUserProfileUI();
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
+        function openUserProfileModal() {
+            const emailInput = document.getElementById('profile-email-input');
+            const phoneInput = document.getElementById('profile-phone-input');
+            const modal = document.getElementById('user-profile-modal');
+            if (emailInput) emailInput.value = localStorage.getItem('modak_user_email') || '';
+            if (phoneInput) phoneInput.value = localStorage.getItem('modak_user_phone') || '';
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeUserProfileModal() {
+            const modal = document.getElementById('user-profile-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function handleUpdateUserProfile(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('profile-email-input');
+            const phoneInput = document.getElementById('profile-phone-input');
+            if (!emailInput || !phoneInput) return;
+            const email = emailInput.value.trim();
+            const phone = phoneInput.value.trim();
+            if (email && phone) {
+                localStorage.setItem('modak_user_email', email);
+                localStorage.setItem('modak_user_phone', phone);
+                closeUserProfileModal();
+                updateUserProfileUI();
+                showMessageBox('Profile Updated', 'Your reseller profile contact information has been updated successfully.');
+            }
+        }
+
+        function loadSavedData() {
+            const savedProducts = localStorage.getItem('modak_products');
+            if (savedProducts) {
+                try { defaultProducts = JSON.parse(savedProducts); } catch(e) {}
+            }
+            const savedTexts = localStorage.getItem('modak_site_texts');
+            if (savedTexts) {
+                try { siteTexts = JSON.parse(savedTexts); } catch(e) {}
+            }
+            const savedCart = localStorage.getItem('modak_cart');
+            if (savedCart) {
+                try { cart = JSON.parse(savedCart); } catch(e) {}
+            }
+            applySiteTexts();
+        }
+
+        function applySiteTexts() {
+            const metaTitle = document.getElementById('meta-site-title');
+            if (metaTitle) metaTitle.textContent = (siteTexts.shopName || 'MODAK ENTERPRISE') + ' | Wholesale Saree Store & Online Reseller Hub';
+            
+            const logoInitial = document.getElementById('text-logo-initial');
+            if (logoInitial && siteTexts.shopName) logoInitial.textContent = siteTexts.shopName.charAt(0);
+            
+            const footerLogoInit = document.getElementById('footer-logo-initial');
+            if (footerLogoInit && siteTexts.shopName) footerLogoInit.textContent = siteTexts.shopName.charAt(0);
+            
+            const shopNameEl = document.getElementById('text-shop-name');
+            if (shopNameEl) shopNameEl.textContent = siteTexts.shopName;
+            
+            const footerShopName = document.getElementById('footer-shop-name');
+            if (footerShopName) footerShopName.textContent = siteTexts.shopName;
+            
+            const signinShopName = document.getElementById('signin-shop-name');
+            if (signinShopName) signinShopName.textContent = siteTexts.shopName;
+            
+            const shopTagline = document.getElementById('text-shop-tagline');
+            if (shopTagline) shopTagline.textContent = siteTexts.shopTagline;
+            
+            const topAnnouncement = document.getElementById('text-top-announcement');
+            if (topAnnouncement) topAnnouncement.textContent = siteTexts.topAnnouncement;
+            
+            const heroTitle = document.getElementById('text-hero-title');
+            if (heroTitle) heroTitle.textContent = siteTexts.heroTitle;
+            
+            const heroSubtitle = document.getElementById('text-hero-subtitle');
+            if (heroSubtitle) heroSubtitle.textContent = siteTexts.heroSubtitle;
+            
+            const catalogHeading = document.getElementById('text-catalog-heading');
+            if (catalogHeading) catalogHeading.textContent = siteTexts.catalogHeading;
+            
+            const aboutUsTitle = document.getElementById('about-us-title');
+            if (aboutUsTitle) aboutUsTitle.textContent = siteTexts.aboutTitle;
+            
+            const aboutBodyEl = document.getElementById('about-us-body');
+            if (aboutBodyEl && siteTexts.aboutBody) {
+                aboutBodyEl.innerHTML = siteTexts.aboutBody.split('\n\n').map(p => `<p>${p}</p>`).join('');
+            }
+            
+            const ownerEmailEl = document.getElementById('owner-contact-email');
+            if (ownerEmailEl) ownerEmailEl.textContent = siteTexts.ownerEmail || 'modakenterprise@gmail.com';
+            
+            const ownerPhoneEl = document.getElementById('owner-contact-phone');
+            if (ownerPhoneEl) ownerPhoneEl.textContent = siteTexts.ownerPhone || '+91 9913441482';
+            
+            const ownerAddressEl = document.getElementById('owner-contact-address');
+            if (ownerAddressEl) ownerAddressEl.textContent = siteTexts.ownerAddress || 'Textile Market, Ring Road, Surat, Gujarat - 395002';
+
+            const beneficiaryName = document.getElementById('checkout-beneficiary-name');
+            if (beneficiaryName) beneficiaryName.textContent = siteTexts.shopName;
+            
+            const upiIdDisplay = document.getElementById('checkout-upi-id-display');
+            if (upiIdDisplay) upiIdDisplay.textContent = siteTexts.upiId || 'modakenterprise@okicici';
+        }
+
+        function renderProducts(category) {
+            currentCategory = category;
+            const grid = document.getElementById('product-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            // Update category button styles
+            ['all', 'Silk', 'Georgette', 'Organza', 'Bandhani'].forEach(cat => {
+                const btn = document.getElementById(`cat-btn-${cat}`);
+                if (btn) {
+                    if (cat === category) {
+                        btn.className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-brand-600 text-white shadow-sm";
+                    } else {
+                        btn.className = "px-4 py-2 rounded-xl text-xs font-semibold transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200";
+                    }
+                }
+            });
+
+            const filtered = category === 'all' ? defaultProducts : defaultProducts.filter(p => p.category === category);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 text-xs">No sarees found in this category.</div>`;
+                return;
+            }
+
+            filtered.forEach(prod => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition flex flex-col group";
+                card.innerHTML = `
+                    <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden">
+                        <img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x800/f5d3d8/a33043?text=Saree+Catalog'">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-brand-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">${prod.category}</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-serif font-bold text-slate-900 text-base mb-1 line-clamp-1">${prod.name}</h4>
+                            <p class="text-xs text-slate-500 mb-4 line-clamp-2">${prod.desc}</p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] uppercase font-bold text-slate-400 block">Wholesale Rate</span>
+                                <span class="text-lg font-bold text-brand-700">₹${prod.price}</span>
+                            </div>
+                            <button onclick="addToCart(${prod.id})" class="bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 border border-brand-100">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Add to Bag</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function addToCart(productId) {
+            const prod = defaultProducts.find(p => p.id === productId);
+            if (!prod) return;
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...prod, qty: 1 });
+            }
+            saveCart();
+            updateCartUI();
+            toggleCartDrawer(true);
+        }
+
+        function updateCartQty(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== productId);
+            }
+            saveCart();
+            updateCartUI();
+        }
+
+        function saveCart() {
+            localStorage.setItem('modak_cart', JSON.stringify(cart));
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const totalCount = cart.reduce((sum, i) => sum + i.qty, 0);
+            if (badge) badge.textContent = totalCount;
+
+            const container = document.getElementById('cart-items-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-slate-400">
+                        <i class="fa-solid fa-bag-shopping text-4xl mb-3 text-slate-200"></i>
+                        <p class="text-xs font-semibold">Your wholesale bag is empty</p>
+                        <p class="text-[11px] text-slate-400 mt-1">Add sarees to begin digital checkout</p>
+                    </div>
+                `;
+                const subtotalEl = document.getElementById('cart-subtotal');
+                if (subtotalEl) subtotalEl.textContent = '₹0';
+                return;
+            }
+
+            let subtotal = 0;
+            cart.forEach(item => {
+                subtotal += item.price * item.qty;
+                const row = document.createElement('div');
+                row.className = "flex items-center gap-4 py-4";
+                row.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-20 object-cover rounded-xl border border-slate-200" onerror="this.src='https://placehold.co/200x200?text=Saree'">
+                    <div class="flex-1 min-w-0">
+                        <h5 class="font-serif font-bold text-slate-900 text-xs truncate">${item.name}</h5>
+                        <p class="text-xs text-brand-700 font-bold mt-0.5">₹${item.price} each</p>
+                        <div class="flex items-center gap-3 mt-2">
+                            <div class="flex items-center border border-slate-200 rounded-lg overflow-hidden bg-slate-50">
+                                <button onclick="updateCartQty(${item.id}, -1)" class="px-2 py-1 text-xs text-slate-600 hover:bg-slate-200 transition">-</button>
+                                <span class="px-3 text-xs font-bold text-slate-800">${item.qty}</span>
+                                <button onclick="updateCartQty(${item.id}, 1)" class="px-2 py-1 text-xs text-slate-600 hover:bg-slate-200 transition">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-bold text-slate-900">₹${item.price * item.qty}</span>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            const subtotalEl = document.getElementById('cart-subtotal');
+            if (subtotalEl) subtotalEl.textContent = '₹' + subtotal;
+        }
+
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById('cart-drawer');
+            if (!drawer) return;
+            if (open) {
+                drawer.classList.remove('hidden');
+            } else {
+                drawer.classList.add('hidden');
+            }
+        }
+
+        function openCheckoutModal() {
+            if (cart.length === 0) {
+                showMessageBox('Wholesale Bag is Empty', 'Please add at least one saree to proceed to payment.', false);
+                return;
+            }
+            toggleCartDrawer(false);
+            const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const checkoutTotal = document.getElementById('checkout-modal-total');
+            if (checkoutTotal) checkoutTotal.textContent = '₹' + subtotal;
+            
+            const upiId = siteTexts.upiId || "modakenterprise@okicici";
+            const payeeName = encodeURIComponent(siteTexts.shopName || "MODAK ENTERPRISE");
+            const amt = subtotal;
+            const upiUri = `upi://pay?pa=${upiId}&pn=${payeeName}&am=${amt}&cu=INR&tn=WholesaleSareeOrder`;
+            
+            const upiDisplay = document.getElementById('checkout-upi-id-display');
+            if (upiDisplay) upiDisplay.textContent = upiId;
+            
+            const customQr = siteTexts.upiQrImage;
+            const qrImgEl = document.getElementById('checkout-custom-qr-img');
+            if (qrImgEl) {
+                if (customQr) {
+                    qrImgEl.src = customQr;
+                } else {
+                    qrImgEl.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUri)}`;
+                }
+            }
+            
+            const intentBtn = document.getElementById('gpay-intent-btn');
+            if (intentBtn) intentBtn.href = upiUri;
+
+            const savedEmail = localStorage.getItem('modak_user_email');
+            const savedPhone = localStorage.getItem('modak_user_phone');
+            const orderEmail = document.getElementById('order-email');
+            const orderPhone = document.getElementById('order-phone');
+            if (savedEmail && orderEmail) orderEmail.value = savedEmail;
+            if (savedPhone && orderPhone) orderPhone.value = savedPhone;
+
+            const checkoutModal = document.getElementById('checkout-modal');
+            if (checkoutModal) checkoutModal.classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            const modal = document.getElementById('checkout-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function handleDigitalPayment(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById('order-name');
+            const emailInput = document.getElementById('order-email');
+            const phoneInput = document.getElementById('order-phone');
+            const addressInput = document.getElementById('order-address');
+            
+            const name = nameInput ? nameInput.value : 'Reseller';
+            const email = emailInput ? emailInput.value : 'reseller@boutique.com';
+            const phone = phoneInput ? phoneInput.value : '9876543210';
+            const address = addressInput ? addressInput.value : 'Pan-India Address';
+            const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
+            const orderDate = new Date().toLocaleString();
+
+            // Compile ordered products detailed summary
+            let orderSummaryText = cart.map(i => `${i.name} (Qty: ${i.qty}, ₹${i.price})`).join(' | ');
+
+            // Owner Notification Mobile Number (Editable from Owner Dashboard)
+            const ownerMobile = siteTexts.ownerPhone || "+91 9913441482";
+            const cleanedPhone = ownerMobile.replace(/[^0-9]/g, '');
+            
+            // Format WhatsApp message text containing all required information
+            const whatsappMessageText = `New Wholesale Order!\n📅 Date: ${orderDate}\n👤 Reseller Name: ${name}\n✉️ Email: ${email}\n📞 Phone: ${phone}\n📍 Address: ${address}\n🛍️ Products: ${orderSummaryText}\n📦 Total Qty: ${totalQty}\n💰 Total Amount: ₹${subtotal}\n✅ GPay Payment Verified.`;
+
+            // Trigger WhatsApp API URL
+            const whatsappUrl = `https://wa.me/${cleanedPhone}?text=${encodeURIComponent(whatsappMessageText)}`;
+            
+            // Open WhatsApp in new window for owner notification
+            const notificationWindow = window.open(whatsappUrl, '_blank');
+            
+            // Fallback: If popup blocker prevents opening window directly, create a temporary link and click it
+            if (!notificationWindow || notificationWindow.closed || typeof notificationWindow.closed == 'undefined') {
+                const tempLink = document.createElement('a');
+                tempLink.href = whatsappUrl;
+                tempLink.target = '_blank';
+                tempLink.click();
+            }
+
+            closeCheckoutModal();
+            cart = [];
+            saveCart();
+            updateCartUI();
+
+            showMessageBox(
+                'Payment Successful & WhatsApp Sent!',
+                `Thank you ${name}! Your GPay payment of ₹${subtotal} has been successfully verified. WhatsApp has been opened with complete order details (products, reseller name, email, phone, quantity, date, and address) for the owner (${ownerMobile}).`
+            );
+        }
+
+        function openOwnerLoginModal() {
+            const modal = document.getElementById('owner-login-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeOwnerLoginModal() {
+            const modal = document.getElementById('owner-login-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function handleOwnerLogin(event) {
+            event.preventDefault();
+            const pwdInput = document.getElementById('owner-password-input');
+            const pwd = pwdInput ? pwdInput.value : '';
+            const currentPwd = localStorage.getItem('modak_owner_pwd') || 'modak2026';
+
+            if (pwd === currentPwd) {
+                closeOwnerLoginModal();
+                if (pwdInput) pwdInput.value = '';
+                openOwnerDashboard();
+            } else {
+                showMessageBox('Invalid Password', 'Incorrect owner password. Please try again.', false);
+            }
+        }
+
+        function openOwnerDashboard() {
+            renderOwnerProductList();
+            populateEditForm();
+            const modal = document.getElementById('owner-dashboard-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeOwnerDashboard() {
+            const modal = document.getElementById('owner-dashboard-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function switchOwnerTab(tab) {
+            const btnUpload = document.getElementById('dash-tab-upload-btn');
+            const btnEdit = document.getElementById('dash-tab-edit-btn');
+            const contentUpload = document.getElementById('dash-content-upload');
+            const contentEdit = document.getElementById('dash-content-edit');
+
+            if (tab === 'upload') {
+                if (btnUpload) btnUpload.className = "p-5 rounded-2xl border-2 text-left transition flex items-start gap-3 border-brand-600 bg-brand-50/50 shadow-sm";
+                if (btnEdit) btnEdit.className = "p-5 rounded-2xl border-2 text-left transition flex items-start gap-3 border-slate-200 bg-white hover:bg-slate-50";
+                if (contentUpload) contentUpload.classList.remove('hidden');
+                if (contentEdit) contentEdit.classList.add('hidden');
+            } else {
+                if (btnEdit) btnEdit.className = "p-5 rounded-2xl border-2 text-left transition flex items-start gap-3 border-brand-600 bg-brand-50/50 shadow-sm";
+                if (btnUpload) btnUpload.className = "p-5 rounded-2xl border-2 text-left transition flex items-start gap-3 border-slate-200 bg-white hover:bg-slate-50";
+                if (contentEdit) contentEdit.classList.remove('hidden');
+                if (contentUpload) contentUpload.classList.add('hidden');
+            }
+        }
+
+        function handleAddNewProduct(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById('new-prod-name');
+            const catInput = document.getElementById('new-prod-cat');
+            const priceInput = document.getElementById('new-prod-price');
+            const descInput = document.getElementById('new-prod-desc');
+            const urlImgInput = document.getElementById('new-prod-img');
+            const fileInput = document.getElementById('new-prod-file-input');
+
+            const name = nameInput ? nameInput.value : '';
+            const category = catInput ? catInput.value : 'Silk';
+            const price = priceInput ? Number(priceInput.value) : 1000;
+            const desc = descInput ? descInput.value : '';
+            const urlImg = urlImgInput ? urlImgInput.value : '';
+
+            if (fileInput && fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const newProduct = {
+                        id: Date.now(),
+                        name, category, price, desc,
+                        image: e.target.result
+                    };
+                    defaultProducts.unshift(newProduct);
+                    localStorage.setItem('modak_products', JSON.stringify(defaultProducts));
+                    renderProducts(currentCategory);
+                    renderOwnerProductList();
+                    event.target.reset();
+                    showMessageBox('Catalog Updated', 'New saree catalog uploaded successfully from your computer.');
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                const newProduct = {
+                    id: Date.now(),
+                    name, category, price, desc,
+                    image: urlImg || 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&auto=format&fit=crop&q=80'
+                };
+                defaultProducts.unshift(newProduct);
+                localStorage.setItem('modak_products', JSON.stringify(defaultProducts));
+                renderProducts(currentCategory);
+                renderOwnerProductList();
+                event.target.reset();
+                showMessageBox('Catalog Updated', 'New saree added to wholesale catalog.');
+            }
+        }
+
+        function renderOwnerProductList() {
+            const listContainer = document.getElementById('owner-product-list');
+            if (!listContainer) return;
+            listContainer.innerHTML = '';
+
+            defaultProducts.forEach(prod => {
+                const item = document.createElement('div');
+                item.className = "flex items-center justify-between p-3 bg-white border border-slate-200 rounded-xl gap-4";
+                item.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <img src="${prod.image}" class="w-12 h-14 object-cover rounded-lg border border-slate-200" onerror="this.src='https://placehold.co/100x100?text=Saree'">
+                        <div>
+                            <h5 class="font-serif font-bold text-slate-900 text-xs">${prod.name}</h5>
+                            <p class="text-[11px] text-brand-700 font-semibold">₹${prod.price} • ${prod.category}</p>
+                        </div>
+                    </div>
+                    <button onclick="deleteProduct(${prod.id})" class="text-red-500 hover:text-red-700 p-2 text-xs transition">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                listContainer.appendChild(item);
+            });
+        }
+
+        function deleteProduct(id) {
+            defaultProducts = defaultProducts.filter(p => p.id !== id);
+            localStorage.setItem('modak_products', JSON.stringify(defaultProducts));
+            renderProducts(currentCategory);
+            renderOwnerProductList();
+        }
+
+        function populateEditForm() {
+            const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
+            setVal('edit-shop-name', siteTexts.shopName);
+            setVal('edit-shop-tagline', siteTexts.shopTagline);
+            setVal('edit-top-announcement', siteTexts.topAnnouncement);
+            setVal('edit-hero-title', siteTexts.heroTitle);
+            setVal('edit-hero-subtitle', siteTexts.heroSubtitle);
+            setVal('edit-catalog-heading', siteTexts.catalogHeading);
+            setVal('edit-about-title', siteTexts.aboutTitle);
+            setVal('edit-about-body', siteTexts.aboutBody);
+            setVal('edit-owner-email', siteTexts.ownerEmail);
+            setVal('edit-owner-phone', siteTexts.ownerPhone);
+            setVal('edit-owner-address', siteTexts.ownerAddress);
+            setVal('owner-upi-id-input', siteTexts.upiId);
+            setVal('edit-owner-pwd', '');
+        }
+
+        function handleSaveSiteTexts(event) {
+            event.preventDefault();
+            const getVal = (id) => { const el = document.getElementById(id); return el ? el.value : ''; };
+            siteTexts.shopName = getVal('edit-shop-name');
+            siteTexts.shopTagline = getVal('edit-shop-tagline');
+            siteTexts.topAnnouncement = getVal('edit-top-announcement');
+            siteTexts.heroTitle = getVal('edit-hero-title');
+            siteTexts.heroSubtitle = getVal('edit-hero-subtitle');
+            siteTexts.catalogHeading = getVal('edit-catalog-heading');
+            siteTexts.aboutTitle = getVal('edit-about-title');
+            siteTexts.aboutBody = getVal('edit-about-body');
+            siteTexts.ownerEmail = getVal('edit-owner-email');
+            siteTexts.ownerPhone = getVal('edit-owner-phone');
+            siteTexts.ownerAddress = getVal('edit-owner-address');
+            siteTexts.upiId = getVal('owner-upi-id-input');
+
+            const fileInput = document.getElementById('owner-qr-file-input');
+            const newPwd = getVal('edit-owner-pwd').trim();
+            if (newPwd) {
+                localStorage.setItem('modak_owner_pwd', newPwd);
+            }
+
+            if (fileInput && fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    siteTexts.upiQrImage = e.target.result;
+                    localStorage.setItem('modak_site_texts', JSON.stringify(siteTexts));
+                    applySiteTexts();
+                    closeOwnerDashboard();
+                    showMessageBox('Settings Saved', 'All website texts, About Us, contact info, mobile notification number, and QR code have been updated successfully.');
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                localStorage.setItem('modak_site_texts', JSON.stringify(siteTexts));
+                applySiteTexts();
+                closeOwnerDashboard();
+                showMessageBox('Settings Saved', 'All website texts, About Us, contact details, and owner mobile notification number have been updated successfully.');
+            }
+        }
+
+        function showMessageBox(title, body, isSuccess = true) {
+            const titleEl = document.getElementById('msg-box-title');
+            const bodyEl = document.getElementById('msg-box-body');
+            const iconEl = document.getElementById('msg-box-icon');
+            const modalEl = document.getElementById('msg-box-modal');
+
+            if (titleEl) titleEl.textContent = title;
+            if (bodyEl) bodyEl.textContent = body;
+            if (iconEl) {
+                if (isSuccess) {
+                    iconEl.className = "w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl";
+                    iconEl.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                } else {
+                    iconEl.className = "w-14 h-14 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl";
+                    iconEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+                }
+            }
+            if (modalEl) modalEl.classList.remove('hidden');
+        }
+
+        function closeMsgBox() {
+            const modal = document.getElementById('msg-box-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
